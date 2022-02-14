@@ -3,7 +3,7 @@ package com.econotravel.api;
 import javax.persistence.*;
 
 @Entity
-@Table(name="experiences")
+@Table(name="categories")
 public class Category{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,7 +11,7 @@ public class Category{
 
     private String name;
 
-    public Category() {
+    public Category(long l, String cultural) {
     }
 
     public Category(String name) {

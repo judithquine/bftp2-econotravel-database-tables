@@ -28,6 +28,9 @@ class IntegrationTests {
     @Autowired
     ExperienceRepository experienceRepository;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
     @BeforeEach
     void setUp() {
         experienceRepository.deleteAll();
@@ -86,14 +89,19 @@ class IntegrationTests {
     }
 
     private void addSampleData() {
-        List<Experience> movies = List.of(
+        List<Experience> experiences = List.of(
                 new Experience("Paseo por el Montseny"),
                 new Experience("Visita a la sagrada familia")
         );
 
-        experienceRepository.saveAll(movies);
+        experienceRepository.saveAll(experiences);
 
+        List<Category> categories = List.of(
+                new Category(0L, "Cultural"),
+                new Category(1L, "Naturaleza")
+        );
 
+        categoryRepository.saveAll(categories);
 
 
     }

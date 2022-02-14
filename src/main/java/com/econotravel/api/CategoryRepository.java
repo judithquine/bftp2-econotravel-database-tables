@@ -1,6 +1,9 @@
 package com.econotravel.api;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CategoryRepository extends JpaRepository<Experience, Long> {
+
+@Repository
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 }
