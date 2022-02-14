@@ -2,14 +2,14 @@
 
 Este repositorio contiene un ejemplo de API REST incompleta, a la que le faltan las siguientes funcionalidades:
 
-- Cada objeto Experience pertenece a una "Category", que se indica a través de su propiedad `categoryId`
+- Cada objeto Experience pertenece a una "Category". Cada Category tiene un id y un nombre (p.e. `0 -> Aventura`, `1 -> Relax`, etc)
 - Podemos recuperar las experiencias de una determinada categoría usando su id. Por ejemplo, `GET /categories/0/experiences` nos
 devolverá las experiencias cuya categoría es la `0`
 
 Para implementar estas funcionalidades podemos usar la relación "many to one", en tanto que cada categoría tiene muchas experiencias, pero
 cada experiencia sólo puede pertenecer a una categoría (en este ejemplo).
 
-### Normas: 
+### Cómo trabajar en este ejercicio: 
 
 1. Un solo repositorio por grupo
 
