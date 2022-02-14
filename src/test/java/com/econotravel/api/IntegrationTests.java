@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class Bftp2EconotravelServerApplicationTests {
+class IntegrationTests {
 
     @Autowired
     MockMvc mockMvc;
@@ -31,12 +31,11 @@ class Bftp2EconotravelServerApplicationTests {
     @BeforeEach
     void setUp() {
         experienceRepository.deleteAll();
+        addSampleData();
     }
 
     @Test
     void returnsTheExistingExperiences() throws Exception {
-
-        addSampleExperiences();
 
         mockMvc.perform(get("/api/experiences"))
                 .andExpect(status().isOk())
@@ -46,17 +45,10 @@ class Bftp2EconotravelServerApplicationTests {
                 .andDo(print());
     }
 
-    private void addSampleExperiences() {
-        List<Experience> movies = List.of(
-                new Experience("Paseo por el Montseny"),
-                new Experience("Visita a la sagrada familia")
-        );
-
-        experienceRepository.saveAll(movies);
-    }
-
     @Test
     void createsNewExperiences() throws Exception {
+
+        experienceRepository.deleteAll();
 
         mockMvc.perform(post("/api/experiences")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -68,6 +60,42 @@ class Bftp2EconotravelServerApplicationTests {
         assertThat(experiences, contains(
                 hasProperty("name", is("Paseo en Bici por el Montseny"))
         ));
+    }
+
+    @Test
+    void getsExistingCategories() throws Exception {
+
+        mockMvc.perform(get("/api/categories"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*]", hasSize(2)))
+                .andExpect(jsonPath("$[0].id", equalTo("0")))
+                .andExpect(jsonPath("$[0].name", equalTo("Cultural")))
+                .andExpect(jsonPath("$[1].id", equalTo("1")))
+                .andExpect(jsonPath("$[1].name", equalTo("Naturaleza")))
+                .andDo(print());
+    }
+
+    @Test
+    void getsExperiencesByCategory() throws Exception {
+
+        mockMvc.perform(get("/api/categories/0/experiences"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*]", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", equalTo("Visita a la sagrada familia")))
+                .andDo(print());
+    }
+
+    private void addSampleData() {
+        List<Experience> movies = List.of(
+                new Experience("Paseo por el Montseny"),
+                new Experience("Visita a la sagrada familia")
+        );
+
+        experienceRepository.saveAll(movies);
+
+
+
+
     }
 
 }
