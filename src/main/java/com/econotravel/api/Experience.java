@@ -12,8 +12,13 @@ public class Experience{
 
     private String name;
 
-    @OneToMany(mappedBy = "experience")
-    private Set<Category> categories;
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
 
     public Experience() {
     }
@@ -38,11 +43,7 @@ public class Experience{
         this.name = name;
     }
 
-    public Set<Category> getCategory() {
-        return categories;
-    }
-
-    public void setCategories(){
-        this.categories = categories;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
