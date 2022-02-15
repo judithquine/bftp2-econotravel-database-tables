@@ -11,14 +11,21 @@ public class Category{
 
     private String name;
 
-    public Category(long l, String cultural) {
+    @ManyToOne
+    @JoinColumn(name = "experience_id", nullable = false)
+    private Experience experience;
+
+    public Category() {
+    }
+
+    public Category(long c, String name) {
     }
 
     public Category(String name) {
         this.name = name;
     }
 
-    public Long getId() {
+      public Long getId() {
         return id;
     }
 

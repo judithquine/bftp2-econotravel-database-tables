@@ -32,7 +32,4 @@ public class CategoryController {
         return categoryRepository.save(category);
     }
 
-    @GetMapping("/api/categories/{id}/experiences")
-    public List<Category> fin
-
 }

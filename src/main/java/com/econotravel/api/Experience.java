@@ -1,6 +1,7 @@
 package com.econotravel.api;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="experiences")
@@ -10,6 +11,9 @@ public class Experience{
     private Long id;
 
     private String name;
+
+    @OneToMany(mappedBy = "experience")
+    private Set<Category> categories;
 
     public Experience() {
     }
@@ -32,5 +36,13 @@ public class Experience{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Category> getCategory() {
+        return categories;
+    }
+
+    public void setCategories(){
+        this.categories = categories;
     }
 }
