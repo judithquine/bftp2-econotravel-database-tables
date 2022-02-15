@@ -25,11 +25,6 @@ public class CategoryController {
         return categoryRepository.findAll();
     }
 
-    @PostMapping
-    public Category createCategory(@RequestBody Category category) {
-        return categoryRepository.save(category);
-    }
-
     @GetMapping("/{id}/experiences")
     public List<Experience> getExperiencesofCategoryId(@PathVariable Long id) {
         Category category = categoryRepository.findById(id).get();

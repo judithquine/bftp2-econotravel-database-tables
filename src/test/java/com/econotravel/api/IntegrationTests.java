@@ -89,12 +89,6 @@ class IntegrationTests {
     }
 
     private void addSampleData() {
-        List<Experience> experiences = List.of(
-                new Experience("Paseo por el Montseny"),
-                new Experience("Visita a la sagrada familia")
-        );
-
-        experienceRepository.saveAll(experiences);
 
         List<Category> categories = List.of(
                 new Category(0L, "Cultural"),
@@ -103,6 +97,14 @@ class IntegrationTests {
 
         categoryRepository.saveAll(categories);
 
+        Experience experience1 = new Experience("Paseo por el Montseny");
+        experience1.setCategory(categoryRepository.getById(1L));
+
+        Experience experience2 = new Experience("Visita a la sagrada familia");
+        experience2.setCategory(categoryRepository.getById(0L));
+
+        List<Experience> experiences = List.of(experience1, experience2);
+        experienceRepository.saveAll(experiences);
 
     }
 
