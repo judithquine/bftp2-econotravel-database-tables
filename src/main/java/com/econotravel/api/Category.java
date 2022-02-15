@@ -1,31 +1,30 @@
 package com.econotravel.api;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="categories")
-public class Category{
+@Table(name = "categories")
+public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "experience_id", nullable = false)
-    private Experience experience;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Experience> experience;
 
     public Category() {
     }
 
-    public Category(long c, String name) {
-    }
-
-    public Category(String name) {
+    public Category(long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-      public Long getId() {
+    public Long getId() {
+
         return id;
     }
 
@@ -34,10 +33,12 @@ public class Category{
     }
 
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 }
